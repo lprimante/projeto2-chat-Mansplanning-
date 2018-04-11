@@ -12,12 +12,20 @@ let contador = function(valor) {
             console.log(resposta[i], bancoDeImagens[i], resultadoFinal[i]); 
             i++;      
             document.getElementById("imgTweet").src = "./assets/img/"+bancoDeImagens[i]; //Troca a imagem ao clicar no botão     
-            window.sessionStorage.setItem("questionario", resultadoFinal); //Armazena as informações do jogo para exibir na tela do resultado
+            sessionStorage.setItem("questionario", JSON.stringify(resultadoFinal)); //Armazena as informações do jogo para exibir na tela do resultado
         } else {
             window.location.replace("resultado.html") //Redireciona para a página de resultados ao final do quiz
         }      
 }
 
 
-
-//document.getElementById("acertos").innerHTML = "<p><span>" +(i+1)+ "</span>" +resultadoFinal[i] 
+let recuperar = JSON.parse(sessionStorage.getItem("questionario")); //Converte o dado da LocalStorage de string para array
+console.log(recuperar); 
+//Função ainda não funciona completamente
+i = 0; 
+do {
+        recuperar[i] === true ? "Acertou" : "Errou"; //Verifica se acertou ou errou a questão para printar na tela final do quiz
+        console.log(recuperar[i]);
+        document.getElementById("acertos").innerHTML = "<p><span>" +(i+1)+ "</span>" +recuperar[i]; //Descobrir como colocar linha no html 
+        i++;
+    } while (i < 9);
