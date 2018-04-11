@@ -1,62 +1,23 @@
-// let buttonNo = document.getElementById('btnNo');
-// let buttonYes = document.getElementById('btnYes');
-// let no = 0;
-// let yes = 0;
-// const resultado = [];
-
-
-// let questionario  =  function() {
-//     for (var i = 0; i < resultado.length; i++) { 
-//     resultado[i];
-
-//         if(buttonNo.addEventListener('click')) {
-//             } function no() {
-//                 console.log(no);
-//             }
-//         }
-
-//         if(buttonYes.addEventListener('click')) {
-//             } function yes() {
-//                 console.log(yes);
-//             }
-// }
-
-//----------------------------------------------------------
-
-// const resultado = [];
-
-// let questionario = function (resposta){
-//     for(var i = 0; i < resultado.length; i++)
-//     resultado = resposta[i];
-//     console.log(resultado);
-//   }
-
-//-----------------------------------------------------------
-
 let bancoDeImagens = ["01-sim.png", "02-sim.png", "03-sim.png", "04-sim.png", "05-nao.png", "06-nao.png", "07-sim.png", "08-sim.png", "09-nao.png", "10-sim.png"];
+const resultado = ["Yes", "Yes", "Yes", "Yes", "No", "No", "Yes", "Yes", "No", "Yes"];
+const resposta = []; //Armazena as infos dada pelo participante
+const resultadoFinal = []; //Armazena as infos validadas com as repostas corretas - True ou False
 
-let btnNo = document.getElementById('btnNo');
-let btnYes = document.getElementById('btnYes');
-const resultado = ["Sim", "Sim", "Sim", "Sim", "Não", "Não", "Sim", "Sim", "Não", "Sim"];
-const resposta = [];
 
+var i = 0;
 let contador = function(valor) {
-    for (var i = 1; i <= 10; i++) { 
-        if(i < 10) {
-            document.getElementById("imgTweet").src = "../assets/img/"+bancoDeImagens[i];
-            resposta[i] = "btn"+valor;
-            console.log(contador);
-            console.log(i);
+        if(i < 9) {
+            resposta[i] = valor; //Pega o valor do parametro no html do index, para deifinir qual botão foi clicado
+            resultadoFinal[i] = resposta[i] === resultado[i] ? true : false; //Valida se a resposta dada está correta ou errada
+            console.log(resposta[i], bancoDeImagens[i], resultadoFinal[i]); 
+            i++;      
+            document.getElementById("imgTweet").src = "./assets/img/"+bancoDeImagens[i]; //Troca a imagem ao clicar no botão     
+            window.sessionStorage.setItem("questionario", resultadoFinal); //Armazena as informações do jogo para exibir na tela do resultado
         } else {
-            window.location.replace("resultado.html")
+            window.location.replace("resultado.html") //Redireciona para a página de resultados ao final do quiz
         }      
-    }
 }
 
-document.getElementById("btnNo").addEventListener('click', contador("No"));
-    
-document.getElementById("btnYes").addEventListener('click', contador("Yes"));
 
 
-
-    
+//document.getElementById("acertos").innerHTML = "<p><span>" +(i+1)+ "</span>" +resultadoFinal[i] 
